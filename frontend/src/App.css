@@ -1,0 +1,79 @@
+.App {
+  font-family: sans-serif;
+  max-width: 900px;
+  margin: auto;
+  padding: 30px;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+.upload-box {
+  margin-bottom: 20px;
+}
+
+input[type="file"] {
+  padding: 5px;
+}
+
+button {
+  margin-left: 15px;
+  padding: 8px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.preview img {
+  max-width: 100%;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+}
+
+.preview {
+  margin-top: 25px;
+}
+
+.labels {
+  text-align: left;
+  margin-top: 30px;
+}
+
+.tag {
+  background: #f1f1f1;
+  padding: 6px 12px;
+  border-radius: 5px;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+.explanation {
+  text-align: left;
+  margin-top: 30px;
+  background: #f9f9f9;
+  padding: 15px;
+  border-left: 4px solid #007acc;
+  border-radius: 4px;
+}
+
+.banner {
+  padding: 12px;
+  font-weight: bold;
+  margin-top: 25px;
+  border-radius: 5px;
+  color: white;
+}
+
+.banner.green {
+  background-color: #4caf50;
+}
+
+.banner.red {
+  background-color: #f44336;
+}
+
+.banner.yellow {
+  background-color: #ff9800;
+}
