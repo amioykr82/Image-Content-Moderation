@@ -51,7 +51,7 @@ async def moderate_image(file: UploadFile = File(...)):
 
     predicted_labels, annotated_image = get_labels_and_annotate(temp_path)
 
-    has_inappropriate = any(lbl in ["nudity", "profanity", "crime", "violence", "alcohol"]
+    has_inappropriate = any(lbl in ["nudity", "crime", "violence"]
                             for lbl, _ in predicted_labels)
     decision = "inappropriate" if has_inappropriate else "appropriate"
     explanation = get_reasoning(predicted_labels, decision)
