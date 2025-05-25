@@ -16,7 +16,7 @@ function App() {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:8000/moderate/", formData, {
+      const response = await axios.post("REACT_APP_BACKEND_URL/moderate/", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setResult(response.data);
