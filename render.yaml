@@ -3,9 +3,9 @@ services:
     name: moderation-backend
     env: python
     plan: free
-    rootDir: backend                   # ✅ Tells Render to run from backend/
-    buildCommand: pip install -r requirements.txt
+    rootDir: backend
+    buildCommand: pip install -r ../requirements.txt     # <-- Note the new relative path
     startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
     envVars:
       - key: OPENAI_API_KEY
-        value: placeholder             # Add the real key in Render dashboard
+        value: placeholder
