@@ -7,11 +7,9 @@ from pydantic import BaseModel
 from models.labeler import get_labels_and_annotate
 from openai import OpenAI
 
-print("OPENAI_API_KEY:", os.getenv("OPENAI_API_KEY"))  # Debug: Remove after confirming
-
 # Set up OpenAI client correctly (NEW SDK interface)
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
+# client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI()  # ✅ DO NOT pass api_key directly
 app = FastAPI()
 
 # Allow CORS for frontend
