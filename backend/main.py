@@ -36,7 +36,7 @@ def get_reasoning(predicted_labels, decision):
     )
 
     try:
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-4",
             messages=[{"role": "user", "content": prompt}]
         )
