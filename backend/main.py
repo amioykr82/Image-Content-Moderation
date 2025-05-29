@@ -5,18 +5,14 @@ from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from models.labeler import get_labels_and_annotate
+import openai
 
-# Optional: Load .env locally
-if os.path.exists(".env"):
-    from dotenv import load_dotenv
-    load_dotenv()
-
-from openai import OpenAI
-
-client = OpenAI()
+# Set up OpenAI client correctly (NEW SDK interface)
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 app = FastAPI()
 
+# Allow CORS for frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -40,11 +36,11 @@ def get_reasoning(predicted_labels, decision):
     )
 
     try:
-        response = client.chat.completions.create(
+        response = openai.ChatCompletion.create(
             model="gpt-4",
             messages=[{"role": "user", "content": prompt}]
         )
-        return response.choices[0].message.content.strip()
+        return response.choices[0].message["content"].strip()
     except Exception as e:
         return f"(⚠️ GPT Error: {e})"
 
