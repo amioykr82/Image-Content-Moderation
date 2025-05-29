@@ -5,10 +5,10 @@ from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from models.labeler import get_labels_and_annotate
-import openai
+from openai import OpenAI
 
 # Set up OpenAI client correctly (NEW SDK interface)
-openai.api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 app = FastAPI()
 
