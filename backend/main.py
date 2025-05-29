@@ -1,18 +1,17 @@
 import os
 import shutil
-import base64
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from models.labeler import get_labels_and_annotate
 from openai import OpenAI
 
-# Set up OpenAI client correctly (NEW SDK interface)
-# client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-client = OpenAI()  # ✅ DO NOT pass api_key directly
+# ✅ Initialize OpenAI with environment variable (OPENAI_API_KEY must be set in Railway)
+client = OpenAI()
+
 app = FastAPI()
 
-# Allow CORS for frontend
+# ✅ Enable CORS for frontend communication
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -21,12 +20,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# ✅ Response schema for image moderation
 class ModerationResponse(BaseModel):
     decision: str
     labels: list
     explanation: str
     annotated_image: str
 
+# ✅ Generate explanation using GPT
 def get_reasoning(predicted_labels, decision):
     tag_list = ", ".join([lbl for lbl, _ in predicted_labels])
     prompt = (
@@ -34,7 +35,6 @@ def get_reasoning(predicted_labels, decision):
         "Please explain why these tags make the image appropriate or inappropriate for publishing on a retail platform.\n"
         "Conclude with a recommended moderation action (allow, review, reject)."
     )
-
     try:
         response = client.chat.completions.create(
             model="gpt-4",
@@ -44,6 +44,7 @@ def get_reasoning(predicted_labels, decision):
     except Exception as e:
         return f"(⚠️ GPT Error: {e})"
 
+# ✅ API Endpoint
 @app.post("/moderate/", response_model=ModerationResponse)
 async def moderate_image(file: UploadFile = File(...)):
     temp_path = f"temp_{file.filename}"
@@ -52,7 +53,7 @@ async def moderate_image(file: UploadFile = File(...)):
 
     predicted_labels, annotated_image = get_labels_and_annotate(temp_path)
 
-    has_inappropriate = any(lbl in ["nudity", "crime", "violence"]
+    has_inappropriate = any(lbl in ["nudity", "crime", "violence", "profanity", "alcohol"]
                             for lbl, _ in predicted_labels)
     decision = "inappropriate" if has_inappropriate else "appropriate"
     explanation = get_reasoning(predicted_labels, decision)
