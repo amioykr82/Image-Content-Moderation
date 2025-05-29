@@ -1,4 +1,3 @@
-import dotenv
 import os
 import shutil
 import base64
@@ -6,10 +5,11 @@ from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from models.labeler import get_labels_and_annotate
-import openai
+from openai import OpenAI
 
-dotenv.load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# ✅ Correct initialization for openai>=1.0.0
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
 app = FastAPI()
 
 app.add_middleware(
@@ -35,7 +35,7 @@ def get_reasoning(predicted_labels, decision):
     )
 
     try:
-        response = openai.chat.completions.create(
+        response = client.chat.completions.create(
             model="gpt-4",
             messages=[{"role": "user", "content": prompt}]
         )
