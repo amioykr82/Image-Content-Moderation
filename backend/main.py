@@ -13,7 +13,7 @@ if os.path.exists(".env"):
 
 from openai import OpenAI
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI()
 
 app = FastAPI()
 
