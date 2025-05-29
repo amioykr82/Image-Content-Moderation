@@ -7,6 +7,8 @@ from pydantic import BaseModel
 from models.labeler import get_labels_and_annotate
 from openai import OpenAI
 
+print("OPENAI_API_KEY:", os.getenv("OPENAI_API_KEY"))  # Debug: Remove after confirming
+
 # Set up OpenAI client correctly (NEW SDK interface)
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
@@ -40,7 +42,7 @@ def get_reasoning(predicted_labels, decision):
             model="gpt-4",
             messages=[{"role": "user", "content": prompt}]
         )
-        return response.choices[0].message["content"].strip()
+        return response.choices[0].message.content.strip()
     except Exception as e:
         return f"(⚠️ GPT Error: {e})"
 
