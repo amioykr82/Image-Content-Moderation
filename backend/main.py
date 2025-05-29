@@ -5,10 +5,14 @@ from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from models.labeler import get_labels_and_annotate
-from openai import OpenAI
 
-# ✅ Correct initialization for openai>=1.0.0
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Load .env in local only
+if os.path.exists(".env"):
+    from dotenv import load_dotenv
+    load_dotenv()
+
+import openai
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 app = FastAPI()
 
@@ -35,7 +39,7 @@ def get_reasoning(predicted_labels, decision):
     )
 
     try:
-        response = client.chat.completions.create(
+        response = openai.ChatCompletion.create(
             model="gpt-4",
             messages=[{"role": "user", "content": prompt}]
         )
