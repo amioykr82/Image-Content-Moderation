@@ -6,11 +6,14 @@ This project provides an AI-powered image moderation tool that classifies upload
 
 ## 🚀 Features
 
-- 🔍 Zero-shot classification using CLIP
-- 🧠 GPT-4-based reasoning and moderation summaries
-- 📌 Real-time image annotation and moderation decision
-- 🌐 React frontend + FastAPI backend
-- 🧰 Easy-to-deploy (locally or cloud)
+- 🔍 **Image Upload & Review** via React UI  
+- 🎯 **CLIP-based Visual Matching** for content labeling  
+- 🧠 **OpenAI GPT Explanation** for moderation decisions  
+- 🖼️ **Annotated Images** with category labels  
+- 💬 **Professional UI/UX Styling**  
+- ☁️ **Deployable on Railway.app** with domain binding  
+- 🧪 Designed for real-time use cases in **retail**, **e-commerce**, **marketplaces**, and **ad tech**  
+
 
 ---
 
@@ -36,5 +39,28 @@ Visual indicators:
 - Theft or shoplifting
 - Arson or graffiti
 
----
+## 📁 Folder Structure
 
+Image-Content-Moderation/
+├── backend/ # FastAPI backend
+│ ├── main.py # Entry point
+│ ├── labeler.py # CLIP + annotation logic
+│ └── models/ # Saved/fine-tuned model files (optional)
+├── frontend/ # React frontend
+│ └── src/
+│ ├── App.js # React UI logic
+│ ├── App.css # Enhanced professional styles
+├── requirements.txt # Backend Python requirements
+├── Dockerfile # For containerized deployment
+├── render.yaml (optional) # For Render deployments
+└── README.md # You’re here
+
+## 🧠 Technologies Used
+
+| Layer      | Tech Stack                               |
+|------------|-------------------------------------------|
+| Frontend   | React, Axios, HTML/CSS                   |
+| Backend    | FastAPI, OpenAI, HuggingFace Transformers |
+| ML Models  | `openai/clip-vit-base-patch32`           |
+| Hosting    | Railway.app (Frontend + Backend)         |
+| Deployment | GitHub → Railway CI/CD    

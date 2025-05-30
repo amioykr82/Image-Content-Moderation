@@ -99,14 +99,22 @@ def get_labels_and_annotate(image_path):
     # Annotate image
     draw = ImageDraw.Draw(image)
     try:
-        font = ImageFont.truetype("arial.ttf", 32)
+        font = ImageFont.truetype("arial.ttf", 44)
     except:
         font = ImageFont.load_default()
 
-    y = 15
+    y = 30
     for label, score in result_labels:
-        draw.text((15, y), f"{label}: {score}", fill="red", font=font)
-        y += 40
+        tag = f"{label.upper()} ({score}%)"
+        box_color = {
+            "violence": (255, 69, 58),
+            "crime": (255, 159, 10),
+            "nudity": (0, 122, 255)
+        }.get(label, (128, 128, 128))
+        text_size = draw.textbbox((0, 0), tag, font=font)
+        draw.rectangle([10, y, 30 + text_size[2], y + text_size[3] + 10], fill=box_color)
+        draw.text((20, y + 5), tag, fill="white", font=font)
+        y += text_size[3] + 20
 
     buf = BytesIO()
     image.save(buf, format="JPEG")

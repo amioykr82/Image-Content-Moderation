@@ -1,79 +1,111 @@
 .App {
-  font-family: sans-serif;
-  max-width: 900px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 960px;
   margin: auto;
-  padding: 30px;
+  padding: 40px 20px;
   text-align: center;
+  color: #333;
 }
 
 h1 {
-  margin-bottom: 30px;
-}
-
-.upload-box {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  font-size: 2.2rem;
+  color: #222;
 }
 
 input[type="file"] {
-  padding: 5px;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
 button {
-  margin-left: 15px;
-  padding: 8px 20px;
+  margin-top: 15px;
+  padding: 10px 25px;
   font-size: 16px;
   cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.preview {
+  margin-top: 30px;
 }
 
 .preview img {
   max-width: 100%;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  margin-top: 10px;
+  height: auto;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-.preview {
+.results {
+  margin-top: 40px;
+  text-align: left;
+}
+
+.results h3,
+.results h4 {
   margin-top: 25px;
-}
-
-.labels {
-  text-align: left;
-  margin-top: 30px;
-}
-
-.tag {
-  background: #f1f1f1;
-  padding: 6px 12px;
-  border-radius: 5px;
-  margin-bottom: 6px;
-  display: inline-block;
-}
-
-.explanation {
-  text-align: left;
-  margin-top: 30px;
-  background: #f9f9f9;
-  padding: 15px;
-  border-left: 4px solid #007acc;
-  border-radius: 4px;
+  color: #444;
 }
 
 .banner {
-  padding: 12px;
+  padding: 15px;
   font-weight: bold;
-  margin-top: 25px;
-  border-radius: 5px;
-  color: white;
+  margin-bottom: 25px;
+  border-radius: 6px;
+  text-align: center;
 }
 
 .banner.green {
-  background-color: #4caf50;
+  background-color: #e6f4ea;
+  color: #237a3b;
+  border: 1px solid #bde5c8;
 }
 
 .banner.red {
-  background-color: #f44336;
+  background-color: #fdecea;
+  color: #a12622;
+  border: 1px solid #f5c6cb;
 }
 
 .banner.yellow {
-  background-color: #ff9800;
+  background-color: #fff4e5;
+  color: #856404;
+  border: 1px solid #ffeeba;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  background: #f1f3f5;
+  padding: 8px 14px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.explanation {
+  background: #f8f9fa;
+  border-left: 5px solid #007acc;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-top: 30px;
+  font-style: italic;
+  color: #555;
+  white-space: pre-line;
 }
